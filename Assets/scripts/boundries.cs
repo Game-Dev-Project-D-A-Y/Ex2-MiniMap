@@ -8,38 +8,44 @@ using UnityEngine;
  */
 public class boundries : MonoBehaviour
 {
-    float scaleX;
-    float scaleY;
-    float rightLimit = 6.3f;
-    float leftLimit = -8.4f;
-    float topLimit = 5.5f;
-    float bottomLimit = -6.3f;
+    float rightLimit;
+
+    float leftLimit;
+
+    float topLimit;
+
+    float bottomLimit;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        GameObject mazeObject = GameObject.Find("maze");
+        Transform mazeTransform = mazeObject.GetComponent<Transform>();
+        RectTransform mazeRect = mazeObject.GetComponent<RectTransform>();
+
+        float mazeWidth = mazeRect.rect.width;
+        float mazeHeight = mazeRect.rect.height;
+        float mazeScaleX = mazeRect.transform.localScale.x;
+        float mazeScaleY = mazeRect.transform.localScale.y;
+
+        Debug.Log("mazeWidth: " + mazeWidth);
+        Debug.Log("mazeHeight: " + mazeHeight);
+        Debug.Log("mazeScaleX: " + mazeScaleX);
+        Debug.Log("mazeScaleY: " + mazeScaleY);
+
+        rightLimit = (mazeWidth * mazeScaleX) / 2 - mazeScaleX / (mazeWidth * 2);
+        leftLimit = -1 * rightLimit;
+
+        topLimit = (mazeHeight * mazeScaleY) / 2 - mazeScaleY / (mazeHeight * 2);
+        bottomLimit = -1 * topLimit;
     }
 
     // Update is called once per frame
     void Update()
     {
-        scaleX = transform.position.x;
-        scaleY = transform.position.y;
-        if (scaleX > rightLimit )
-        {
-            transform.position = new Vector3(rightLimit, scaleY, 0);
-        }
-        if ( scaleX < leftLimit)
-        {
-            transform.position = new Vector3(leftLimit, scaleY, 0);
-        }
-        if (scaleY > topLimit)
-        {
-            transform.position = new Vector3(scaleX, topLimit, 0);
-        }
-        if (scaleY < bottomLimit)
-        {
-            transform.position = new Vector3(scaleX, bottomLimit, 0);
-        }
+        Vector3 pos = transform.position;
+        pos.x = Mathf.Clamp(pos.x, leftLimit, rightLimit);
+        pos.y = Mathf.Clamp(pos.y, bottomLimit, topLimit);
+        transform.position = pos;
     }
 }
