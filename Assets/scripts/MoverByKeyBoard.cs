@@ -8,11 +8,13 @@ using UnityEngine;
 
 public class MoverByKeyBoard : MonoBehaviour
 {
+
     //step represents the distance of the movment
     [SerializeField]
     float step = 0.01f;
     float scaleX;
     float scaleY;
+
     void Start()
     {
         //the current position of this object
@@ -27,20 +29,21 @@ public class MoverByKeyBoard : MonoBehaviour
         {
             transform.position += new Vector3(0, step, 0);
         }
+
         if (Input.GetKey(KeyCode.DownArrow))
         {
             transform.position -= new Vector3(0, step, 0);
         }
+
         if (Input.GetKey(KeyCode.RightArrow))
         {
             transform.position += new Vector3(step, 0, 0);
         }
+
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            transform.position -= new Vector3(step, 0, 0);
-            
+            transform.position -= new Vector3(step, 0, 0);  
         }
-       
     }
 }
 
