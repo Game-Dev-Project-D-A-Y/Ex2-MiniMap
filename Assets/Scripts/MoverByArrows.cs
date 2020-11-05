@@ -10,7 +10,7 @@ public class MoverByArrows : MonoBehaviour
 {
 
     [SerializeField]
-    float step = 0.05f;
+    float step;
     
     void Start()
     {
