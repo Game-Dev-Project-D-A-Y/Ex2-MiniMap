@@ -4,7 +4,7 @@ using UnityEngine;
 
 /**
  * This component gives boundries to the object we will return the object to the center
- * of the map as soon as he reaches his limit.
+ * of the map as soon as he reaches his limit!
  */
 public class Boundries : MonoBehaviour
 {
